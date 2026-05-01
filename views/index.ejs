@@ -1,0 +1,499 @@
+<% 
+  var siteUrl = locals.siteUrl || ''; 
+  var pixelId = locals.pixelId || '';
+%>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luật sư Sở hữu trí tuệ và Đại diện SHTT | Công ty Luật HDS</title>
+    <meta name="description" content="Công ty Luật HDS tư vấn pháp lý doanh nghiệp, đăng ký nhãn hiệu, bản quyền, sáng chế, kiểu dáng công nghiệp và xử lý tranh chấp sở hữu trí tuệ tại Việt Nam.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚖️</text></svg>">
+    <link rel="canonical" href="<%= siteUrl %>/">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="<%= siteUrl %>/">
+    <meta property="og:title" content="Luật sư Sở hữu trí tuệ và Đại diện SHTT | Công ty Luật HDS">
+    <meta property="og:description" content="Công ty Luật HDS tư vấn pháp lý doanh nghiệp, đăng ký nhãn hiệu, bản quyền, sáng chế, kiểu dáng công nghiệp và xử lý tranh chấp sở hữu trí tuệ tại Việt Nam.">
+    <meta property="og:image" content="<%= siteUrl %><%= content.hero.image %>">
+    <meta property="og:locale" content="vi_VN">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="<%= siteUrl %>/">
+    <meta property="twitter:title" content="Luật sư Sở hữu trí tuệ và Đại diện SHTT | Công ty Luật HDS">
+    <meta property="twitter:description" content="Công ty Luật HDS tư vấn pháp lý doanh nghiệp, đăng ký nhãn hiệu, bản quyền, sáng chế, kiểu dáng công nghiệp và xử lý tranh chấp sở hữu trí tuệ tại Việt Nam.">
+    <meta property="twitter:image" content="<%= siteUrl %><%= content.hero.image %>">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "LegalService",
+        "name": "Công ty Luật HDS",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "169 Nguyễn Ngọc Vũ",
+          "addressLocality": "Hà Nội",
+          "addressCountry": "VN"
+        },
+        "telephone": "<%= content.footer.phone %>",
+        "url": "<%= siteUrl %>",
+        "image": "<%= siteUrl %><%= content.hero.image %>"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Công ty Luật HDS",
+        "url": "<%= siteUrl %>",
+        "logo": "<%= siteUrl %>/image/facebook.png",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "<%= content.footer.phone %>",
+          "contactType": "customer service"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Công ty Luật HDS",
+        "image": "<%= siteUrl %><%= content.hero.image %>",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "169 Nguyễn Ngọc Vũ",
+          "addressLocality": "Hà Nội",
+          "addressCountry": "VN"
+        },
+        "telephone": "<%= content.footer.phone %>"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "HDS có hỗ trợ đăng ký nhãn hiệu không?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Có. HDS tư vấn tra cứu, chuẩn bị hồ sơ, nộp đơn và theo dõi quá trình xử lý hồ sơ đăng ký nhãn hiệu theo quy định."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Thời gian đăng ký nhãn hiệu mất bao lâu?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Thời gian phụ thuộc vào quá trình thẩm định của cơ quan nhà nước. HDS sẽ tư vấn mốc thời gian dự kiến sau khi đánh giá hồ sơ cụ thể."
+            }
+          }
+        ]
+      }
+    ]
+    </script>
+
+    <script>
+      window.trackPixel = function(eventName, payload) {
+          if (typeof fbq !== 'undefined') {
+              if (eventName === 'Lead' || eventName === 'PageView') {
+                  fbq('track', eventName, payload);
+              } else {
+                  fbq('trackCustom', eventName, payload);
+              }
+          } else {
+              console.log('Pixel event (not loaded):', eventName);
+          }
+      };
+    </script>
+    
+    <% if (pixelId) { %>
+    <!-- Facebook Pixel Code -->
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '<%= pixelId %>');
+      fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=<%= pixelId %>&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Facebook Pixel Code -->
+    <% } %>
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="/" class="logo">
+                <i class="fas fa-balance-scale"></i>
+                HDS <span>LAW FIRM</span>
+            </a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <nav id="nav">
+                <ul>
+                    <li><a href="#about">Giới thiệu</a></li>
+                    <li><a href="#services">Dịch vụ</a></li>
+                    <li><a href="#process">Quy trình</a></li>
+                    <li><a href="#why-us">Vì sao chọn HDS</a></li>
+                    <li><a href="#contact">Tư vấn</a></li>
+                </ul>
+            </nav>
+            <a href="#contact" class="header-cta">Liên hệ tư vấn</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" style="background-image: linear-gradient(rgba(7, 31, 56, 0.7), rgba(7, 31, 56, 0.7)), url('<%= content.hero.image %>');">
+            <img src="<%= content.hero.image %>" alt="Luật sư và Đại diện Sở hữu trí tuệ HDS" style="display: none;">
+            <div class="container">
+                <div class="hero-content">
+                    <h1><%= content.hero.title %></h1>
+                    <p><%= content.hero.subtitle %></p>
+                    <div class="hero-btns">
+                        <a href="#contact" class="btn btn-primary" onclick="trackPixel('HeroCtaClick')"><%= content.hero.cta_primary %></a>
+                        <a href="#services" class="btn btn-secondary"><%= content.hero.cta_secondary %></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Customer Issues -->
+        <section class="reveal " id="about">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Tài sản trí tuệ có thể mất giá trị nếu không được bảo hộ đúng thời điểm</h2>
+                    <div class="underline"></div>
+                </div>
+                <div class="customer-issues-grid">
+                    <div class="issue-card">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p>Nhãn hiệu có thể bị bên khác nộp đơn trước.</p>
+                    </div>
+                    <div class="issue-card">
+                        <i class="fas fa-copy"></i>
+                        <p>Sản phẩm, thiết kế có thể bị sao chép trái phép.</p>
+                    </div>
+                    <div class="issue-card">
+                        <i class="fas fa-file-contract"></i>
+                        <p>Hợp đồng M&A phát sinh rủi ro nếu thiếu rà soát.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services -->
+        <section class="services-section reveal" id="services">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Lĩnh vực dịch vụ</h2>
+                    <div class="underline"></div>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-copyright"></i></div>
+                        <div class="service-info">
+                            <h3>Sở hữu trí tuệ</h3>
+                            <ul>
+                                <li>Đăng ký nhãn hiệu</li>
+                                <li>Đăng ký bản quyền tác giả</li>
+                                <li>Đăng ký sáng chế</li>
+                                <li>Đăng ký kiểu dáng công nghiệp</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-gavel"></i></div>
+                        <div class="service-info">
+                            <h3>Xử lý tranh chấp</h3>
+                            <ul>
+                                <li>Xử lý xâm phạm nhãn hiệu</li>
+                                <li>Soạn thư cảnh báo</li>
+                                <li>Hồ sơ khiếu nại</li>
+                                <li>Đại diện làm việc cơ quan nhà nước</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-briefcase"></i></div>
+                        <div class="service-info">
+                            <h3>Pháp lý doanh nghiệp</h3>
+                            <ul>
+                                <li>Thành lập doanh nghiệp</li>
+                                <li>Thay đổi đăng ký kinh doanh</li>
+                                <li>Hợp đồng thương mại</li>
+                                <li>Tư vấn quản trị nội bộ</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process -->
+        <section class="process-section reveal" id="process" style="background: var(--bg-light);">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Quy trình làm việc</h2>
+                    <div class="underline"></div>
+                </div>
+                <div class="process-grid">
+                    <div class="process-step">
+                        <span class="step-num">01</span>
+                        <h4>Tiếp nhận</h4>
+                        <p>Ghi nhận nhu cầu và tài liệu ban đầu.</p>
+                    </div>
+                    <div class="process-step">
+                        <span class="step-num">02</span>
+                        <h4>Đánh giá</h4>
+                        <p>Phân loại vấn đề, xác định hướng xử lý.</p>
+                    </div>
+                    <div class="process-step">
+                        <span class="step-num">03</span>
+                        <h4>Đề xuất</h4>
+                        <p>Trình bày lựa chọn pháp lý và chi phí.</p>
+                    </div>
+                    <div class="process-step">
+                        <span class="step-num">04</span>
+                        <h4>Triển khai</h4>
+                        <p>Soạn thảo và nộp hồ sơ cơ quan nhà nước.</p>
+                    </div>
+                    <div class="process-step">
+                        <span class="step-num">05</span>
+                        <h4>Theo dõi</h4>
+                        <p>Cập nhật tiến độ và báo cáo định kỳ.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us -->
+        <section class="reveal" id="why-us">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Vì sao chọn HDS</h2>
+                    <div class="underline"></div>
+                </div>
+                <div class="why-us-grid">
+                    <img src="/image/facebook.png" alt="Đội ngũ chuyên gia pháp lý và luật sư Sở hữu trí tuệ HDS" class="why-us-img">
+                    <div class="why-us-content">
+                        <div class="why-us-item">
+                            <h4><i class="fas fa-check-circle"></i> Chuyên môn sâu về SHTT</h4>
+                            <p>Tập trung vào bảo vệ thương hiệu và tài sản trí tuệ doanh nghiệp.</p>
+                        </div>
+                        <div class="why-us-item">
+                            <h4><i class="fas fa-shield-alt"></i> Tư duy phòng ngừa</h4>
+                            <p>Ưu tiên rà soát sớm để giảm thiểu chi phí tranh chấp.</p>
+                        </div>
+                        <div class="why-us-item">
+                            <h4><i class="fas fa-lock"></i> Bảo mật tuyệt đối</h4>
+                            <p>Tuân thủ nguyên tắc bảo mật thông tin khách hàng nghiêm ngặt.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="reveal" id="faq" style="background: var(--bg-light); border-radius: 15px; margin-top: 50px; margin-bottom: 50px;">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Câu hỏi thường gặp</h2>
+                    <div class="underline"></div>
+                </div>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <h4>HDS có hỗ trợ đăng ký nhãn hiệu không?</h4>
+                        <p>Có. HDS tư vấn tra cứu, chuẩn bị hồ sơ, nộp đơn và theo dõi quá trình xử lý hồ sơ đăng ký nhãn hiệu theo quy định.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>Thời gian đăng ký nhãn hiệu mất bao lâu?</h4>
+                        <p>Thời gian phụ thuộc vào quá trình thẩm định của cơ quan nhà nước. HDS sẽ tư vấn mốc thời gian dự kiến sau khi đánh giá hồ sơ cụ thể.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Form -->
+        <section class="contact-section reveal" id="contact">
+            <div class="container">
+                <div class="contact-wrapper">
+                    <div class="contact-info">
+                        <h2>Gửi thông tin để HDS đánh giá nhu cầu tư vấn</h2>
+                        <p style="margin-bottom: 30px; color: var(--text-secondary);">Thông tin bạn cung cấp được dùng để HDS liên hệ và tư vấn phạm vi xử lý phù hợp.</p>
+                        
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>Địa chỉ</h4>
+                                <p><%= content.footer.address %></p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h4>Hotline</h4>
+                                <p><%= content.footer.phone %></p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>Email</h4>
+                                <p><%= content.footer.email %></p>
+                            </div>
+                        </div>
+                    </div>
+                    <form class="contact-form" id="contactForm">
+                        <div style="display:none;">
+                            <input type="text" name="honeypot">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="name" placeholder="Họ và tên *" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" name="phone" placeholder="Số điện thoại *" required>
+                        </div>
+                        <div class="form-group">
+                            <select name="service">
+                                <option value="">Chọn dịch vụ quan tâm</option>
+                                <option value="SHTT">Sở hữu trí tuệ</option>
+                                <option value="Tranh chấp">Xử lý tranh chấp</option>
+                                <option value="Doanh nghiệp">Pháp lý doanh nghiệp</option>
+                                <option value="Khác">Khác</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="message" placeholder="Nội dung cần tư vấn *" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Gửi yêu cầu tư vấn</button>
+                        <div id="formStatus" style="margin-top: 15px; display: none; padding: 10px; border-radius: 5px;"></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <h3 class="logo" style="color: white;"><i class="fas fa-balance-scale"></i> HDS <span>LAW FIRM</span></h3>
+                    <p><%= content.footer.slogan %></p>
+                </div>
+                <div class="footer-links">
+                    <h4>Liên kết</h4>
+                    <ul>
+                        <li><a href="#about">Giới thiệu</a></li>
+                        <li><a href="#services">Dịch vụ</a></li>
+                        <li><a href="#contact">Liên hệ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Pháp lý</h4>
+                    <ul>
+                        <li><a href="#">Chính sách bảo mật</a></li>
+                        <li><a href="#">Điều khoản sử dụng</a></li>
+                        <li><a href="#">Miễn trừ trách nhiệm</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 <%= content.footer.company_name %>. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Fixed Contact Buttons -->
+    <div class="fixed-btns">
+        <a href="https://zalo.me/0914646357" target="_blank" class="fixed-btn btn-zalo" onclick="trackPixel('ContactZaloClick')">
+            <i class="fab fa-facebook-messenger" style="font-size: 1.5rem;"></i>
+        </a>
+        <a href="tel:<%= content.footer.phone %>" class="fixed-btn btn-phone" onclick="trackPixel('ContactPhoneClick')">
+            <i class="fas fa-phone-alt" style="font-size: 1.5rem;"></i>
+        </a>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const nav = document.getElementById('nav');
+        
+        hamburger.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
+
+        document.querySelectorAll('nav ul li a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+            });
+        });
+
+        // Scroll Animation
+        const reveals = document.querySelectorAll('.reveal');
+        const windowHeight = window.innerHeight;
+
+        function checkReveal() {
+            reveals.forEach(reveal => {
+                const revealTop = reveal.getBoundingClientRect().top;
+                if (revealTop < windowHeight - 100) {
+                    reveal.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', checkReveal);
+        window.addEventListener('load', checkReveal);
+
+        // Form Submission
+        const contactForm = document.getElementById('contactForm');
+        const formStatus = document.getElementById('formStatus');
+
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(contactForm);
+            const data = Object.fromEntries(formData.entries());
+
+            try {
+                const response = await fetch('/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const result = await response.json();
+
+                formStatus.style.display = 'block';
+                formStatus.textContent = result.message;
+                formStatus.style.background = result.success ? '#e8f5e9' : '#ffebee';
+                formStatus.style.color = result.success ? '#2e7d32' : '#c62828';
+
+                if (result.success) {
+                    contactForm.reset();
+                    if (typeof trackPixel === 'function') {
+                        trackPixel('Lead');
+                    }
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        });
+    </script>
+</body>
+</html>

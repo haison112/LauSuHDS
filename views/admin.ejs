@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - HDS Law Firm</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: #f0f2f5;
+        }
+        .admin-nav {
+            background: var(--navy);
+            color: white;
+            padding: 15px 0;
+            margin-bottom: 30px;
+        }
+        .admin-nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .admin-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+        .admin-card h2 {
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--bg-light);
+            padding-bottom: 10px;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .admin-form-group {
+            margin-bottom: 15px;
+        }
+        .admin-form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+        .admin-form-group input, .admin-form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+        }
+        .contacts-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .contacts-table th, .contacts-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--bg-light);
+        }
+        .contacts-table th {
+            background: var(--bg-light);
+            color: var(--navy);
+        }
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .status-new { background: #e3f2fd; color: #1976d2; }
+        .status-contacted { background: #e8f5e9; color: #2e7d32; }
+        .status-processing { background: #fff3e0; color: #f57c00; }
+        .btn-sm {
+            padding: 5px 10px;
+            font-size: 0.8rem;
+            border-radius: 3px;
+        }
+        .tab-menu {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .tab-item {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+        }
+        .tab-item.active {
+            border-color: var(--gold);
+            font-weight: 700;
+            color: var(--navy);
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-nav">
+        <div class="container">
+            <h3>HDS Admin Dashboard</h3>
+            <a href="/admin/logout" style="color: white;"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="tab-menu">
+            <div class="tab-item active" onclick="showTab('content')">Quản lý nội dung</div>
+            <div class="tab-item" onclick="showTab('contacts')">Yêu cầu tư vấn</div>
+        </div>
+
+        <!-- Content Management Tab -->
+        <div id="contentTab" class="tab-content active">
+            <div class="admin-card">
+                <h2>Hero Section</h2>
+                <form action="/admin/update-content" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="section_id" value="hero">
+                    <div class="form-grid">
+                        <div class="admin-form-group">
+                            <label>Tiêu đề chính</label>
+                            <input type="text" name="key" value="title" hidden>
+                            <textarea name="value" rows="3"><%= content.hero.title %></textarea>
+                            <button type="submit" class="btn btn-primary btn-sm" style="margin-top: 5px;">Lưu</button>
+                        </div>
+                    </div>
+                </form>
+                <form action="/admin/update-content" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="section_id" value="hero">
+                    <div class="form-grid">
+                        <div class="admin-form-group">
+                            <label>Tiêu đề phụ</label>
+                            <input type="text" name="key" value="subtitle" hidden>
+                            <textarea name="value" rows="3"><%= content.hero.subtitle %></textarea>
+                            <button type="submit" class="btn btn-primary btn-sm" style="margin-top: 5px;">Lưu</button>
+                        </div>
+                    </div>
+                </form>
+                <form action="/admin/update-content" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="section_id" value="hero">
+                    <input type="hidden" name="key" value="image">
+                    <div class="admin-form-group">
+                        <label>Ảnh Hero</label>
+                        <input type="file" name="image">
+                        <p style="font-size: 0.8rem; color: gray; margin-top: 5px;">Hiện tại: <%= content.hero.image %></p>
+                        <button type="submit" class="btn btn-primary btn-sm" style="margin-top: 5px;">Tải lên</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="admin-card">
+                <h2>Footer & Liên hệ</h2>
+                <div class="form-grid">
+                    <form action="/admin/update-content" method="POST">
+                        <input type="hidden" name="section_id" value="footer">
+                        <input type="hidden" name="key" value="address">
+                        <div class="admin-form-group">
+                            <label>Địa chỉ</label>
+                            <input type="text" name="value" value="<%= content.footer.address %>">
+                            <button type="submit" class="btn btn-primary btn-sm" style="margin-top: 5px;">Lưu</button>
+                        </div>
+                    </form>
+                    <form action="/admin/update-content" method="POST">
+                        <input type="hidden" name="section_id" value="footer">
+                        <input type="hidden" name="key" value="phone">
+                        <div class="admin-form-group">
+                            <label>Hotline</label>
+                            <input type="text" name="value" value="<%= content.footer.phone %>">
+                            <button type="submit" class="btn btn-primary btn-sm" style="margin-top: 5px;">Lưu</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contacts Management Tab -->
+        <div id="contactsTab" class="tab-content">
+            <div class="admin-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h2>Danh sách yêu cầu tư vấn</h2>
+                    <a href="/admin/export-excel" class="btn btn-primary btn-sm"><i class="fas fa-file-excel"></i> Xuất Excel</a>
+                </div>
+                <div style="overflow-x: auto;">
+                    <table class="contacts-table">
+                        <thead>
+                            <tr>
+                                <th>Ngày gửi</th>
+                                <th>Họ tên</th>
+                                <th>Số điện thoại</th>
+                                <th>Dịch vụ</th>
+                                <th>Nội dung</th>
+                                <th>Trạng thái</th>
+                                <th>Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% contacts.forEach(contact => { %>
+                                <tr>
+                                    <td><%= new Date(contact.created_at).toLocaleString('vi-VN') %></td>
+                                    <td><%= contact.name %></td>
+                                    <td><%= contact.phone %></td>
+                                    <td><%= contact.service %></td>
+                                    <td><%= contact.message %></td>
+                                    <td>
+                                        <span class="status-badge status-<%= contact.status.toLowerCase() %>">
+                                            <%= contact.status %>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <select onchange="updateStatus(<%= contact.id %>, this.value)" class="btn-sm">
+                                            <option value="New" <%= contact.status === 'New' ? 'selected' : '' %>>Mới</option>
+                                            <option value="Contacted" <%= contact.status === 'Contacted' ? 'selected' : '' %>>Đã liên hệ</option>
+                                            <option value="Processing" <%= contact.status === 'Processing' ? 'selected' : '' %>>Đang xử lý</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-item').forEach(item => item.classList.remove('active'));
+            
+            document.getElementById(tabName + 'Tab').classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        async function updateStatus(id, status) {
+            try {
+                const response = await fetch('/admin/update-contact-status', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id, status })
+                });
+                if (response.ok) {
+                    location.reload();
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    </script>
+</body>
+</html>
